@@ -9,7 +9,7 @@ node_modules/
 /build/
 
 # Env 
-.env*
+/frontend/.env
 
 # IDE configurations
 .vscode/
