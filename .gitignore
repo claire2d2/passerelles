@@ -8,6 +8,9 @@ node_modules/
 /dist/
 /build/
 
+# Env 
+.env*
+
 # IDE configurations
 .vscode/
 .idea/
