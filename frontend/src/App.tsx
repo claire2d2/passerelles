@@ -44,6 +44,9 @@ export default function App() {
       <Route path="/" element={<Layout/>}>
           <Route path="signup" element={<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />}/>
           <Route index element={<Homepage/>}/>
+          <Route path="/all"/>
+          <Route path="/add"/>
+          <Route path="/about"/>
       </Route>
 
     </Routes>
