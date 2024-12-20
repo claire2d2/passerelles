@@ -8,7 +8,7 @@ const Layout = () => {
 		<main className="h-screen flex flex-col items-center w-full">
 			<div className="flex-1 w-full h-full flex flex-col">
 				<nav className="w-full h-16 bg-main grid grid-cols-5 gap-2 font-bold text-white items-center ">
-					<div className="col-span-1 pl-5 text-2xl">Passion Passerelles</div>
+					<div className="col-span-1 pl-5 text-2xl"><Link to="/">Passion Passerelles</Link></div>
 					<ul className="col-span-3 grid grid-cols-3 gap-2  text-center ">
 						<li className="hover:text-text"> <Link to="/all">Liste complète</Link> </li>
 						<li className="hover:text-text"><Link to="/add">Rajouter une passerelle</Link></li>
