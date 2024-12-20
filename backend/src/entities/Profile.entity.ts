@@ -11,7 +11,7 @@ import {
   } from "typeorm";
   import PasserelleEntity from "./Passerelle.entity";
 
-  @Entity({ name: "ads" })
+  @Entity({ name: "profiles" })
 export default class ProfileEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string

@@ -14,7 +14,7 @@ import {
   import ProfileEntity from "./Profile.entity";
 
 
-  @Entity({ name: "ads" })
+  @Entity({ name: "passerelles" })
 export default class PasserelleEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -46,7 +46,7 @@ export default class PasserelleEntity {
   favorites: ProfileEntity[];
   
 
-  @Column()
+  @Column({ default: true })
   validated: Boolean
   
 

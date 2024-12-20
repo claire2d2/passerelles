@@ -85,12 +85,17 @@ export type Scalars = {
   Void: { input: any; output: any; }
 };
 
+export type CreateGeoInput = {
+  lat: Scalars['String']['input'];
+  lng: Scalars['String']['input'];
+};
+
 export type CreatePasserelleInput = {
   contributorId?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  favoritesIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  geoId: Scalars['String']['input'];
   image: Scalars['String']['input'];
+  lat?: InputMaybe<Scalars['String']['input']>;
+  lng?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
   validated?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -117,8 +122,14 @@ export type Geo = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createGeo?: Maybe<Geo>;
   createPasserelle?: Maybe<Passerelle>;
   updatePasserelle?: Maybe<Passerelle>;
+};
+
+
+export type MutationCreateGeoArgs = {
+  data: CreateGeoInput;
 };
 
 
@@ -271,6 +282,7 @@ export type ResolversTypes = {
   Byte: ResolverTypeWrapper<Scalars['Byte']['output']>;
   CountryCode: ResolverTypeWrapper<Scalars['CountryCode']['output']>;
   CountryName: ResolverTypeWrapper<Scalars['CountryName']['output']>;
+  CreateGeoInput: CreateGeoInput;
   CreatePasserelleInput: CreatePasserelleInput;
   Cuid: ResolverTypeWrapper<Scalars['Cuid']['output']>;
   Currency: ResolverTypeWrapper<Scalars['Currency']['output']>;
@@ -357,6 +369,7 @@ export type ResolversParentTypes = {
   Byte: Scalars['Byte']['output'];
   CountryCode: Scalars['CountryCode']['output'];
   CountryName: Scalars['CountryName']['output'];
+  CreateGeoInput: CreateGeoInput;
   CreatePasserelleInput: CreatePasserelleInput;
   Cuid: Scalars['Cuid']['output'];
   Currency: Scalars['Currency']['output'];
@@ -605,6 +618,7 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createGeo?: Resolver<Maybe<ResolversTypes['Geo']>, ParentType, ContextType, RequireFields<MutationCreateGeoArgs, 'data'>>;
   createPasserelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType, RequireFields<MutationCreatePasserelleArgs, 'data'>>;
   updatePasserelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType, RequireFields<MutationUpdatePasserelleArgs, 'data'>>;
 };

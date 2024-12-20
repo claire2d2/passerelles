@@ -10,3 +10,12 @@ type Geo {
 type Query {
     findGeo(id:ID!): Geo
 }
+
+type Mutation {
+    createGeo(data: CreateGeoInput!): Geo
+}
+
+input CreateGeoInput {
+    lat: String!
+    lng: String!
+}

@@ -30,8 +30,8 @@ input CreatePasserelleInput {
     title: String!
     description: String
     image: String!
-    geoId: String!
-    favoritesIds : [String]
+    lat: String
+    lng: String
     contributorId: String
     validated: Boolean
 
