@@ -1,5 +1,3 @@
-import React from "react";
-
 const All = () => {
 	return (
 		<div className="flex flex-col h-full">

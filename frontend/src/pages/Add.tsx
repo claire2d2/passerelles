@@ -1,4 +1,3 @@
-import React from 'react'
 
 // map
 // when clicking on a map, creating point
