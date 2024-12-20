@@ -4,7 +4,8 @@ type Passerelle {
     description: String
     image: String
     geo: Geo
-    favorites : Fave
+    favorites : [Profile]
+    contributor: Profile
     validated: Boolean
     created_at: Date
     updated_ate: Date
