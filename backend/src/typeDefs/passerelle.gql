@@ -16,9 +16,35 @@ type Query {
     findPasserelle(id: ID!): Passerelle
 }
 
+type Mutation {
+  createPasserelle(data: CreatePasserelleInput!): Passerelle
+  updatePasserelle(data: UpdatePasserelleInput!): Passerelle
+}
+
 input FilterType {
   limit: Int
   order: FindOptionOrderValue 
+}
+
+input CreatePasserelleInput {
+    title: String!
+    description: String
+    image: String!
+    geoId: String!
+    favoritesIds : [String]
+    contributorId: String
+    validated: Boolean
+
+}
+
+input UpdatePasserelleInput {
+    title: String!
+    description: String
+    image: String!
+    geoId: String!
+    favoritesIds : [String]
+    contributorId: String
+    validated: Boolean
 }
 
 enum FindOptionOrderValue {

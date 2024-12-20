@@ -39,8 +39,13 @@ export default class PasserelleEntity {
   @OneToOne(() => ProfileEntity)
   contributor: ProfileEntity
 
-  @ManyToMany(() => ProfileEntity, (p)=> p.favorites)
-  favorites : ProfileEntity[];
+  @ManyToMany(() => ProfileEntity, (p) => p.favorites, {
+    cascade: ["remove"],
+    onDelete: "CASCADE", // Ensures that related join table rows are deleted when a Passerelle is removed
+  })
+  @JoinTable()
+  favorites: ProfileEntity[];
+  
 
   @Column()
   validated: Boolean

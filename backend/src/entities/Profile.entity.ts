@@ -22,7 +22,10 @@ export default class ProfileEntity {
   @Column()
   is_admin: Boolean
 
-  @ManyToMany(() => PasserelleEntity)
+  @ManyToMany(() => PasserelleEntity, (p) => p.favorites, {
+    cascade: ["remove"],
+    onDelete: "CASCADE", // Ensures that related join table rows are deleted when a Passerelle is removed
+  }) 
   @JoinTable({
     name: "favorites", // Name of the join table
     joinColumn: { name: "profile_id", referencedColumnName: "id" }, // Join column for ProfileEntity
