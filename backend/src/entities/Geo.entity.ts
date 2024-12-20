@@ -12,7 +12,7 @@ import {
   import PasserelleEntity from "./Passerelle.entity";
 
   @Entity({ name: "ads" })
-export default class GeoEntity {
+  export default class GeoEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string
 

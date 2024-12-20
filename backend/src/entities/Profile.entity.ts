@@ -22,16 +22,22 @@ export default class ProfileEntity {
   @Column()
   is_admin: Boolean
 
-  @ManyToMany(() => PasserelleEntity, (p) => p.favorites, {
-    cascade: ["remove"],
-    onDelete: "CASCADE", // Ensures that related join table rows are deleted when a Passerelle is removed
-  }) 
-  @JoinTable({
-    name: "favorites", // Name of the join table
-    joinColumn: { name: "profile_id", referencedColumnName: "id" }, // Join column for ProfileEntity
-    inverseJoinColumn: { name: "passerelle_id", referencedColumnName: "id" }, // Join column for PasserelleEntity
+  @ManyToMany(() => PasserelleEntity, {
+    onDelete: "CASCADE"
   })
-  favorites: PasserelleEntity[];
+  @JoinTable({
+  name: "favorites", // Join table name
+  joinColumn: {
+    name: "profile_id", // Foreign key column in the join table for ProfileEntity
+    referencedColumnName: "id", // ProfileEntity's primary key
+  },
+  inverseJoinColumn: {
+    name: "passerelle_id", // Foreign key column in the join table for PasserelleEntity
+    referencedColumnName: "id", // PasserelleEntity's primary key
+  },
+})
+favorites: PasserelleEntity[];
+
 
 
   @OneToMany(() => PasserelleEntity, (p) => p.contributor)
