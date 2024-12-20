@@ -1,5 +1,5 @@
 type Passerelle {
-    id: id
+    id: ID
     title: String
     description: String
     image: String
@@ -9,4 +9,19 @@ type Passerelle {
     validated: Boolean
     created_at: Date
     updated_ate: Date
+}
+
+type Query {
+    passerelles(filter: FilterType): [Passerelle]
+    findPasserelle(id: ID!): Passerelle
+}
+
+input FilterType {
+  limit: Int
+  order: FindOptionOrderValue 
+}
+
+enum FindOptionOrderValue {
+  ASC
+  DESC
 }

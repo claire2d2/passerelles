@@ -7,3 +7,7 @@ type Profile {
     created_at: Date
     updated_at: Date
 }
+
+type Query {
+    findProfileId(id: ID!): Profile
+}

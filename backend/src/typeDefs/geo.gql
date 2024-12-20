@@ -6,3 +6,7 @@ type Geo {
     created_at: Date
     updated_ate: Date
 }
+
+type Query {
+    findGeo(id:ID!): Geo
+}

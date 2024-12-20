@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "compile": "tsc",
-    "dev": "ts-node-dev --watch ./src ./src/index.ts",
-    "start": "npm run compile && node ./dist/index.js",
+    "start": "ts-node-dev --watch ./src ./src/index.ts",
     "codegen": "graphql-codegen --config codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,15 +21,13 @@
     "@types/express": "^5.0.0",
     "@types/graphql-depth-limit": "^1.1.6",
     "@types/multer": "^1.4.12",
-    "@types/node": "^22.10.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.2"
+    "@types/node": "^22.9.0",
+    "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.14",
-    "@supabase/supabase-js": "github:supabase/supabase-js",
     "axios": "^1.7.9",
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
@@ -43,14 +39,13 @@
     "module-alias": "^2.2.3",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.13.1",
+    "postgres": "^3.4.5",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
     "supabase": "^2.1.1",
     "typeorm": "^0.3.20"
   },
   "_moduleAliases": {
-    "@": "./src",
-    "@src": "./dist/src",
-    "@utils": "./dist/utils"
+    "@": "./src"
   }
 }
