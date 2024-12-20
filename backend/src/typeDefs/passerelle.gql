@@ -1,0 +1,11 @@
+type Passerelle {
+    id: id
+    title: String
+    description: String
+    image: String
+    geo: Geo
+    favorites : Fave
+    validated: Boolean
+    created_at: Date
+    updated_ate: Date
+}

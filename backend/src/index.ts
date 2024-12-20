@@ -4,7 +4,9 @@ import "module-alias/register";
 import depthLimit from 'graphql-depth-limit'
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import datasource from "./lib/datasource";
+import typeDefs from "./typeDefs";
+import resolvers from "./resolvers";
+import {datasource} from "./lib/datasource";
 
 
 
