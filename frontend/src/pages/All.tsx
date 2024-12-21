@@ -1,87 +1,7 @@
-import photo from "../components/All/test-photo.jpg"
-import PasserelleCard from "../components/All/PasserelleCard";
+import PasserelleTiles from "../components/All/PasserelleTiles";
+import examplePasserelles from "../components/All/example.json"
 const All = () => {
 	// rajouter pagination
-
-    const examplePasserelles = [
-        {
-            id: "1",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            country: "France",
-            city: "Paris",
-            validated: true
-        },
-        {
-            id: "2",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            country: "France",
-            city: "Lyon",
-            validated: true
-        },
-        {
-            id: "3",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            country: "France",
-            city: "Paris",
-            validated: true
-        },
-        {
-            id: "4",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            country: "France",
-            city: "Paris",
-            validated: true
-        },
-        {
-            id: "5",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            country: "France",
-            city: "Paris",
-            validated: true
-        },
-        {
-            id: "6",
-            title: "Example 1",
-            description: "Lorem ipsum thingie",
-            image: photo,
-            geo: {
-                lat: "123",
-                lng: "123"
-            },
-            city: "Lyon",
-            validated: true
-        }
-    ]
 
 	return (
 		<div className="flex flex-row h-full">
@@ -121,11 +41,10 @@ const All = () => {
 						</select>
 					</div>
 				</div>
-                <div className={`max-h-[90%] grid grid-cols-${4} grid-rows-2 gap-1 p-2`}>
-                    {examplePasserelles.map((passerelle)=> {
-                        return <PasserelleCard key={passerelle.id} image={passerelle.image} title={passerelle.title} country={passerelle.country} city={passerelle.city}/>
-                    })}
+                <div className="max-h-[90%]">
+                    <PasserelleTiles />
                 </div>
+               
                 <div className="h-10">Pagination</div>
 			</div>
 		</div>
