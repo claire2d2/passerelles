@@ -1,35 +1,38 @@
-import React from 'react'
-import { useEffect } from 'react';
+import React from "react";
+import { useEffect } from "react";
 
-interface data  {
-    title: string;
-    // description: string;
-    image: string;
-    // geo: {
-    //     lat: string;
-    //     lng: string;
-    // },
-    country: string | undefined;
-    city: string | undefined;
-    // validated: boolean
+interface data {
+	title: string;
+	// description: string;
+	image: string;
+	// geo: {
+	//     lat: string;
+	//     lng: string;
+	// },
+	country: string | undefined;
+	city: string | undefined;
+	// validated: boolean
 }
 
+const PasserelleCard: React.FC<data> = ({ title, image, country, city }) => {
+	useEffect(() => {
+		console.log(title);
+	}, []);
 
-const PasserelleCard:React.FC<data> = ({title, image, country, city}) => {
+	return (
+		<div
+			className={`col-span-1 flex flex-col gap-2 p-1 border border-solid border-text rounded-md justify-center items-center`}
+		>
+			<h3>{title}</h3>
+			<div className="h-2/3 w-full">
+				<img className="h-full w-full object-cover" src={image} alt="photo de passerelle" />
+			</div>
+			<div className="text-sm">
+                <p><span className="font-medium">Pays: </span><span className="italic">{country ? country : "Inconnu"}</span></p>
+                <p><span className="font-medium">Ville: </span><span className="italic">{city ? city : "Inconnu"}</span></p>
+            </div>
+		</div>
+	);
+};
 
-    useEffect (() => {
-        console.log(title)
-    },[])
-    
-  return (
-    <div className={`bg-button w-1/${4} h-1/${4} flex flex-col p-2 border border-solid border-text rounded-md`}>
-       <h3>{title}</h3>
-       <div className="h-1/2 w-1/2 bg-main"></div>
-       <p>Pays: {country ? country : "Inconnu"}</p>
-       <p>Ville: {city ? city : "Inconnu"}</p>
-    
-    </div>
-  )
-}
-
-export default PasserelleCard
+export default PasserelleCard;
