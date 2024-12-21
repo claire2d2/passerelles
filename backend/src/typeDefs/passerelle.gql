@@ -24,6 +24,7 @@ type Mutation {
 
 input FilterType {
   limit: Int
+  sortBy: String
   order: FindOptionOrderValue 
 }
 

@@ -13,9 +13,14 @@ export default class PasserelleService {
 	}
 
 	async listPasserelles(options: QueryPasserellesArgs["filter"]) {
+		const sortBy = options?.sortBy || "created_at";
+		const validSortFields = ["created_at", "title", "updated_at"];
+		if (!validSortFields.includes(sortBy)) {
+			throw new Error(`Invalid sortBy field: ${sortBy}`);
+		}
 		return await this.db.find({
 			relations: ["contributor"],
-			order: { created_at: options?.order ?? "ASC" },
+			order: { [sortBy]: options?.order ?? "ASC" },
 			take: options?.limit || undefined,
 		});
 	}
@@ -33,7 +38,7 @@ export default class PasserelleService {
 
 	async create({
 		contributorId,
-        image,
+		image,
 		...passerelle
 	}: MutationCreatePasserelleArgs["data"]) {
 		const { title, description, lat, lng } = passerelle;
@@ -42,15 +47,15 @@ export default class PasserelleService {
 			...passerelle,
 			title,
 			description,
-            image,
-            lat,
-            lng
+			image,
+			lat,
+			lng,
 		});
 		const errors = await validate(newPass);
 		if (errors.length > 0) {
 			throw new Error(errors[0].toString());
 		}
 		await this.db.save(newPass);
-        return newPass;
+		return newPass;
 	}
 }

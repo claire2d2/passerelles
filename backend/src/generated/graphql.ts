@@ -98,6 +98,7 @@ export type CreatePasserelleInput = {
 export type FilterType = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   order?: InputMaybe<FindOptionOrderValue>;
+  sortBy?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum FindOptionOrderValue {

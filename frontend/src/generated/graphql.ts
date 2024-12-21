@@ -179,6 +179,13 @@ export type UpdatePasserelleInput = {
   validated?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type PasserellesQueryVariables = Exact<{
+  filter?: InputMaybe<FilterType>;
+}>;
+
+
+export type PasserellesQuery = { __typename?: 'Query', passerelles?: Array<{ __typename?: 'Passerelle', id?: string | null, title?: string | null, updated_at?: any | null, validated?: boolean | null, created_at?: any | null, description?: string | null } | null> | null };
+
 export type FindPasserelleQueryVariables = Exact<{
   findPasserelleId: Scalars['ID']['input'];
 }>;
@@ -187,6 +194,51 @@ export type FindPasserelleQueryVariables = Exact<{
 export type FindPasserelleQuery = { __typename?: 'Query', findPasserelle?: { __typename?: 'Passerelle', title?: string | null, image?: string | null, description?: string | null, lat: string, lng: string } | null };
 
 
+export const PasserellesDocument = gql`
+    query Passerelles($filter: FilterType) {
+  passerelles(filter: $filter) {
+    id
+    title
+    updated_at
+    validated
+    created_at
+    description
+  }
+}
+    `;
+
+/**
+ * __usePasserellesQuery__
+ *
+ * To run a query within a React component, call `usePasserellesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePasserellesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePasserellesQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function usePasserellesQuery(baseOptions?: Apollo.QueryHookOptions<PasserellesQuery, PasserellesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PasserellesQuery, PasserellesQueryVariables>(PasserellesDocument, options);
+      }
+export function usePasserellesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PasserellesQuery, PasserellesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PasserellesQuery, PasserellesQueryVariables>(PasserellesDocument, options);
+        }
+export function usePasserellesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<PasserellesQuery, PasserellesQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PasserellesQuery, PasserellesQueryVariables>(PasserellesDocument, options);
+        }
+export type PasserellesQueryHookResult = ReturnType<typeof usePasserellesQuery>;
+export type PasserellesLazyQueryHookResult = ReturnType<typeof usePasserellesLazyQuery>;
+export type PasserellesSuspenseQueryHookResult = ReturnType<typeof usePasserellesSuspenseQuery>;
+export type PasserellesQueryResult = Apollo.QueryResult<PasserellesQuery, PasserellesQueryVariables>;
 export const FindPasserelleDocument = gql`
     query FindPasserelle($findPasserelleId: ID!) {
   findPasserelle(id: $findPasserelleId) {
