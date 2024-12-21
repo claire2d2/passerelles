@@ -5,6 +5,8 @@ type Passerelle {
     image: String
     lat: String!
     lng: String!
+    country: String
+    city: String
     favorites : [Profile]
     contributor: Profile
     validated: Boolean
@@ -34,6 +36,8 @@ input CreatePasserelleInput {
     image: String!
     lat: String
     lng: String
+    country: String
+    city: String
     contributorId: String
     validated: Boolean
 

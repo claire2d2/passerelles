@@ -87,7 +87,9 @@ export type Scalars = {
 };
 
 export type CreatePasserelleInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
   contributorId?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   image: Scalars['String']['input'];
   lat?: InputMaybe<Scalars['String']['input']>;
@@ -99,6 +101,7 @@ export type CreatePasserelleInput = {
 export type FilterType = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   order?: InputMaybe<FindOptionOrderValue>;
+  sortBy?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum FindOptionOrderValue {
@@ -124,7 +127,9 @@ export type MutationUpdatePasserelleArgs = {
 
 export type Passerelle = {
   __typename?: 'Passerelle';
+  city?: Maybe<Scalars['String']['output']>;
   contributor?: Maybe<Profile>;
+  country?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['Date']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   favorites?: Maybe<Array<Maybe<Profile>>>;
@@ -184,7 +189,7 @@ export type PasserellesQueryVariables = Exact<{
 }>;
 
 
-export type PasserellesQuery = { __typename?: 'Query', passerelles?: Array<{ __typename?: 'Passerelle', id?: string | null, title?: string | null, updated_at?: any | null, validated?: boolean | null, created_at?: any | null, description?: string | null } | null> | null };
+export type PasserellesQuery = { __typename?: 'Query', passerelles?: Array<{ __typename?: 'Passerelle', id?: string | null, title?: string | null, image?: string | null, country?: string | null, city?: string | null, validated?: boolean | null, created_at?: any | null, updated_at?: any | null, description?: string | null } | null> | null };
 
 export type FindPasserelleQueryVariables = Exact<{
   findPasserelleId: Scalars['ID']['input'];
@@ -199,9 +204,12 @@ export const PasserellesDocument = gql`
   passerelles(filter: $filter) {
     id
     title
-    updated_at
+    image
+    country
+    city
     validated
     created_at
+    updated_at
     description
   }
 }

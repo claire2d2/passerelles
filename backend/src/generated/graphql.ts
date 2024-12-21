@@ -86,7 +86,9 @@ export type Scalars = {
 };
 
 export type CreatePasserelleInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
   contributorId?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   image: Scalars['String']['input'];
   lat?: InputMaybe<Scalars['String']['input']>;
@@ -124,7 +126,9 @@ export type MutationUpdatePasserelleArgs = {
 
 export type Passerelle = {
   __typename?: 'Passerelle';
+  city?: Maybe<Scalars['String']['output']>;
   contributor?: Maybe<Profile>;
+  country?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['Date']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   favorites?: Maybe<Array<Maybe<Profile>>>;
@@ -615,7 +619,9 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type PasserelleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Passerelle'] = ResolversParentTypes['Passerelle']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contributor?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   favorites?: Resolver<Maybe<Array<Maybe<ResolversTypes['Profile']>>>, ParentType, ContextType>;

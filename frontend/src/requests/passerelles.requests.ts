@@ -5,9 +5,12 @@ export const FIND_PASSERELLES = gql`
         passerelles(filter: $filter) {
     id
     title
-    updated_at
+    image
+    country
+    city
     validated
     created_at
+    updated_at
     description
   }
     }
