@@ -3,12 +3,13 @@ type Passerelle {
     title: String
     description: String
     image: String
-    geo: Geo
+    lat: String!
+    lng: String!
     favorites : [Profile]
     contributor: Profile
     validated: Boolean
     created_at: Date
-    updated_ate: Date
+    updated_at: Date
 }
 
 type Query {
@@ -41,7 +42,6 @@ input UpdatePasserelleInput {
     title: String!
     description: String
     image: String!
-    geoId: String!
     favoritesIds : [String]
     contributorId: String
     validated: Boolean

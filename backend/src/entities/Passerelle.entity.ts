@@ -1,58 +1,48 @@
 import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    CreateDateColumn,
-    UpdateDateColumn,
-    OneToOne,
-    ManyToOne,
-    ManyToMany,
-    JoinTable,
-  } from "typeorm";
-  import { Length } from "class-validator";
-  import GeoEntity from "./Geo.entity";
-  import ProfileEntity from "./Profile.entity";
+	Entity,
+	Column,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+	OneToOne,
+	JoinColumn
+} from "typeorm";
+import { Length } from "class-validator";
+import ProfileEntity from "./Profile.entity";
 
-
-  @Entity({ name: "passerelles" })
+@Entity({ name: "passerelles" })
 export default class PasserelleEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-  @Length(5)
-  @Column()
-  title: string;
+	@Length(5)
+	@Column()
+	title: string;
 
-  @Column({nullable: true})
-  description?: string;
+	@Column({ nullable: true })
+	description?: string;
 
-  @Column()
-  image: string;
+	@Column()
+	image: string;
 
-  @OneToOne(() => GeoEntity, {
-    cascade: true,
-    onDelete: "CASCADE",
-    nullable: false
-  })
-  geo: GeoEntity;
-  
-  @OneToOne(() => ProfileEntity)
-  contributor: ProfileEntity
+	@Column()
+    lat: string;
 
-  @ManyToMany(() => ProfileEntity, (p) => p.favorites, {
-    onDelete: "CASCADE"
-  })
-  @JoinTable()
-  favorites: ProfileEntity[];
-  
+    @Column()
+    lng: string;
 
-  @Column({ default: true })
-  validated: Boolean
-  
+	@OneToOne(() => ProfileEntity)
+	@JoinColumn({
+		name: "contributor_id", // Foreign key column in `passerelles` table
+	})
+	contributor: ProfileEntity;
 
-  @CreateDateColumn()
-  created_at: Date;
+	@Column({ default: true })
+	validated: Boolean;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+	@CreateDateColumn()
+	created_at: Date;
+
+	@UpdateDateColumn()
+	updated_at: Date;
 }

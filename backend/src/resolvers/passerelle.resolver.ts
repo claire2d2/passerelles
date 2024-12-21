@@ -1,7 +1,6 @@
 import PasserelleEntity from "@/entities/Passerelle.entity";
 import { MutationCreatePasserelleArgs, QueryPasserellesArgs } from "@/generated/graphql";
 import PasserelleService from "@/services/passerelle.service";
-import GeoEntity from "@/entities/Geo.entity";
 
 export default {
     Query: {

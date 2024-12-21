@@ -85,11 +85,6 @@ export type Scalars = {
   Void: { input: any; output: any; }
 };
 
-export type CreateGeoInput = {
-  lat: Scalars['String']['input'];
-  lng: Scalars['String']['input'];
-};
-
 export type CreatePasserelleInput = {
   contributorId?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -110,26 +105,10 @@ export enum FindOptionOrderValue {
   Desc = 'DESC'
 }
 
-export type Geo = {
-  __typename?: 'Geo';
-  created_at?: Maybe<Scalars['Date']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  lat?: Maybe<Scalars['String']['output']>;
-  lng?: Maybe<Scalars['String']['output']>;
-  passerelle?: Maybe<Passerelle>;
-  updated_ate?: Maybe<Scalars['Date']['output']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  createGeo?: Maybe<Geo>;
   createPasserelle?: Maybe<Passerelle>;
   updatePasserelle?: Maybe<Passerelle>;
-};
-
-
-export type MutationCreateGeoArgs = {
-  data: CreateGeoInput;
 };
 
 
@@ -148,11 +127,12 @@ export type Passerelle = {
   created_at?: Maybe<Scalars['Date']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   favorites?: Maybe<Array<Maybe<Profile>>>;
-  geo?: Maybe<Geo>;
   id?: Maybe<Scalars['ID']['output']>;
   image?: Maybe<Scalars['String']['output']>;
+  lat: Scalars['String']['output'];
+  lng: Scalars['String']['output'];
   title?: Maybe<Scalars['String']['output']>;
-  updated_ate?: Maybe<Scalars['Date']['output']>;
+  updated_at?: Maybe<Scalars['Date']['output']>;
   validated?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -169,15 +149,9 @@ export type Profile = {
 
 export type Query = {
   __typename?: 'Query';
-  findGeo?: Maybe<Geo>;
   findPasserelle?: Maybe<Passerelle>;
   findProfileId?: Maybe<Profile>;
   passerelles?: Maybe<Array<Maybe<Passerelle>>>;
-};
-
-
-export type QueryFindGeoArgs = {
-  id: Scalars['ID']['input'];
 };
 
 
@@ -199,7 +173,6 @@ export type UpdatePasserelleInput = {
   contributorId?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   favoritesIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  geoId: Scalars['String']['input'];
   image: Scalars['String']['input'];
   title: Scalars['String']['input'];
   validated?: InputMaybe<Scalars['Boolean']['input']>;
@@ -282,7 +255,6 @@ export type ResolversTypes = {
   Byte: ResolverTypeWrapper<Scalars['Byte']['output']>;
   CountryCode: ResolverTypeWrapper<Scalars['CountryCode']['output']>;
   CountryName: ResolverTypeWrapper<Scalars['CountryName']['output']>;
-  CreateGeoInput: CreateGeoInput;
   CreatePasserelleInput: CreatePasserelleInput;
   Cuid: ResolverTypeWrapper<Scalars['Cuid']['output']>;
   Currency: ResolverTypeWrapper<Scalars['Currency']['output']>;
@@ -296,7 +268,6 @@ export type ResolversTypes = {
   FilterType: FilterType;
   FindOptionOrderValue: FindOptionOrderValue;
   GUID: ResolverTypeWrapper<Scalars['GUID']['output']>;
-  Geo: ResolverTypeWrapper<Geo>;
   GeoJSON: ResolverTypeWrapper<Scalars['GeoJSON']['output']>;
   HSL: ResolverTypeWrapper<Scalars['HSL']['output']>;
   HSLA: ResolverTypeWrapper<Scalars['HSLA']['output']>;
@@ -369,7 +340,6 @@ export type ResolversParentTypes = {
   Byte: Scalars['Byte']['output'];
   CountryCode: Scalars['CountryCode']['output'];
   CountryName: Scalars['CountryName']['output'];
-  CreateGeoInput: CreateGeoInput;
   CreatePasserelleInput: CreatePasserelleInput;
   Cuid: Scalars['Cuid']['output'];
   Currency: Scalars['Currency']['output'];
@@ -382,7 +352,6 @@ export type ResolversParentTypes = {
   EmailAddress: Scalars['EmailAddress']['output'];
   FilterType: FilterType;
   GUID: Scalars['GUID']['output'];
-  Geo: Geo;
   GeoJSON: Scalars['GeoJSON']['output'];
   HSL: Scalars['HSL']['output'];
   HSLA: Scalars['HSLA']['output'];
@@ -507,16 +476,6 @@ export interface GuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'GUID';
 }
 
-export type GeoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Geo'] = ResolversParentTypes['Geo']> = {
-  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  passerelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType>;
-  updated_ate?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export interface GeoJsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GeoJSON'], any> {
   name: 'GeoJSON';
 }
@@ -618,7 +577,6 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createGeo?: Resolver<Maybe<ResolversTypes['Geo']>, ParentType, ContextType, RequireFields<MutationCreateGeoArgs, 'data'>>;
   createPasserelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType, RequireFields<MutationCreatePasserelleArgs, 'data'>>;
   updatePasserelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType, RequireFields<MutationUpdatePasserelleArgs, 'data'>>;
 };
@@ -660,11 +618,12 @@ export type PasserelleResolvers<ContextType = any, ParentType extends ResolversP
   created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   favorites?: Resolver<Maybe<Array<Maybe<ResolversTypes['Profile']>>>, ParentType, ContextType>;
-  geo?: Resolver<Maybe<ResolversTypes['Geo']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lat?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  lng?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updated_ate?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   validated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -701,7 +660,6 @@ export type ProfileResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  findGeo?: Resolver<Maybe<ResolversTypes['Geo']>, ParentType, ContextType, RequireFields<QueryFindGeoArgs, 'id'>>;
   findPasserelle?: Resolver<Maybe<ResolversTypes['Passerelle']>, ParentType, ContextType, RequireFields<QueryFindPasserelleArgs, 'id'>>;
   findProfileId?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType, RequireFields<QueryFindProfileIdArgs, 'id'>>;
   passerelles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Passerelle']>>>, ParentType, ContextType, Partial<QueryPasserellesArgs>>;
@@ -787,7 +745,6 @@ export type Resolvers<ContextType = any> = {
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
   GUID?: GraphQLScalarType;
-  Geo?: GeoResolvers<ContextType>;
   GeoJSON?: GraphQLScalarType;
   HSL?: GraphQLScalarType;
   HSLA?: GraphQLScalarType;

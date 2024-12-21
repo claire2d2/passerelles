@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config(); // This loads your .env file
 import PasserelleEntity from "@/entities/Passerelle.entity";
 import ProfileEntity from "@/entities/Profile.entity";
-import GeoEntity from "@/entities/Geo.entity";
 
 export const datasource = new DataSource({
   type: "postgres", // Use PostgreSQL as the database type
@@ -13,7 +12,7 @@ export const datasource = new DataSource({
   // username: process.env.SUPABASE_USERNAME,
   // password: process.env.SUPABASE_PASSWORD,
   // database: process.env.SUPABASE_DATABASE,
-  entities: [PasserelleEntity, ProfileEntity, GeoEntity], // Add your entities here
+  entities: [PasserelleEntity, ProfileEntity], // Add your entities here
   synchronize: true, // Automatically synchronize schema (avoid in production; use migrations instead)
   logging: false, // Set to true if you want to see queries in the terminal
   // Optionally, enable detailed logging for errors or queries:
