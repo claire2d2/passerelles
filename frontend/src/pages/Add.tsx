@@ -4,15 +4,19 @@
 // get user info
 
 import Map from "react-map-gl";
+import GeocoderControl from "../components/Add/GeoCoderControl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./../components/Add/Add.css";
+import { useState } from "react";
 
 const Add = () => {
 	const mapBoxAPI = import.meta.env.VITE_MAPBOX_API_TOKEN;
+
+  const [isMarker, setIsMarker] = useState<boolean>(false)
+
 	return (
 		<div className="h-full flex items-center justify-center text-center">
-			<div className="h-full w-1/2 flex flex-1 flex-col ">
-      <div>Cliquez sur la carte pour indiquer où se trouve la passerelle : </div>
+			<div className="h-full w-full flex flex-1 flex-col ">
 				<div className="MapContainer h-full w-full">
 					<Map
 						mapboxAccessToken={mapBoxAPI}
@@ -22,11 +26,12 @@ const Add = () => {
 							zoom: 14,
 						}}
 						style={{ height: "100%", width: "100%" }}
-						mapStyle="mapbox://styles/mapbox/streets-v9"
-					/>
+						mapStyle="mapbox://styles/mapbox/streets-v9">
+               <GeocoderControl mapboxAccessToken={mapBoxAPI} position="top-left" setIsMarker={setIsMarker}/>
+               <button className="absolute right-0 top-0 bg-button text-white disabled:bg-disabled" disabled={!isMarker}>Rajouter une passerelle</button>
+            </Map>
 				</div>
 			</div>
-			<div className="h-full w-1/2">Ou tapez directement son addresse pour la trouver : </div>
 		</div>
 	);
 };

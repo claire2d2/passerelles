@@ -9,6 +9,7 @@ export default {
 			button: "#BA3F1D",
       active: "#AB2B08",
       white : "white",
+      disabled: "#94a3b8",
       text: "#0f172a"
 		},
 	},
