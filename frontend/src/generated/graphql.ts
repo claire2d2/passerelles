@@ -198,6 +198,13 @@ export type FindPasserelleQueryVariables = Exact<{
 
 export type FindPasserelleQuery = { __typename?: 'Query', findPasserelle?: { __typename?: 'Passerelle', title?: string | null, image?: string | null, description?: string | null, lat: string, lng: string } | null };
 
+export type CreatePasserelleMutationVariables = Exact<{
+  data: CreatePasserelleInput;
+}>;
+
+
+export type CreatePasserelleMutation = { __typename?: 'Mutation', createPasserelle?: { __typename?: 'Passerelle', id?: string | null, title?: string | null, description?: string | null, lng: string, lat: string, country?: string | null, city?: string | null } | null };
+
 
 export const PasserellesDocument = gql`
     query Passerelles($filter: FilterType) {
@@ -291,3 +298,42 @@ export type FindPasserelleQueryHookResult = ReturnType<typeof useFindPasserelleQ
 export type FindPasserelleLazyQueryHookResult = ReturnType<typeof useFindPasserelleLazyQuery>;
 export type FindPasserelleSuspenseQueryHookResult = ReturnType<typeof useFindPasserelleSuspenseQuery>;
 export type FindPasserelleQueryResult = Apollo.QueryResult<FindPasserelleQuery, FindPasserelleQueryVariables>;
+export const CreatePasserelleDocument = gql`
+    mutation CreatePasserelle($data: CreatePasserelleInput!) {
+  createPasserelle(data: $data) {
+    id
+    title
+    description
+    lng
+    lat
+    country
+    city
+  }
+}
+    `;
+export type CreatePasserelleMutationFn = Apollo.MutationFunction<CreatePasserelleMutation, CreatePasserelleMutationVariables>;
+
+/**
+ * __useCreatePasserelleMutation__
+ *
+ * To run a mutation, you first call `useCreatePasserelleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePasserelleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPasserelleMutation, { data, loading, error }] = useCreatePasserelleMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreatePasserelleMutation(baseOptions?: Apollo.MutationHookOptions<CreatePasserelleMutation, CreatePasserelleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePasserelleMutation, CreatePasserelleMutationVariables>(CreatePasserelleDocument, options);
+      }
+export type CreatePasserelleMutationHookResult = ReturnType<typeof useCreatePasserelleMutation>;
+export type CreatePasserelleMutationResult = Apollo.MutationResult<CreatePasserelleMutation>;
+export type CreatePasserelleMutationOptions = Apollo.BaseMutationOptions<CreatePasserelleMutation, CreatePasserelleMutationVariables>;

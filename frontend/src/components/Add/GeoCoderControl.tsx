@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useControl, Marker, MarkerProps, ControlPosition } from 'react-map-gl';
 import MapboxGeocoder, { GeocoderOptions } from '@mapbox/mapbox-gl-geocoder';
+import { CreatePasserelleInput } from '../../generated/graphql';
 
 type GeocoderControlProps = Omit<GeocoderOptions, 'accessToken' | 'mapboxgl' | 'marker'> & {
   mapboxAccessToken: string;
@@ -12,6 +13,7 @@ type GeocoderControlProps = Omit<GeocoderOptions, 'accessToken' | 'mapboxgl' | '
   onResult?: (e: object) => void;
   onError?: (e: object) => void;
   setIsMarker: React.Dispatch<React.SetStateAction<boolean>>
+  setNewData: React.Dispatch<React.SetStateAction<any>>
 };
 
 export default function GeocoderControl({
@@ -23,6 +25,7 @@ export default function GeocoderControl({
   onResult = () => {},
   onError = () => {},
   setIsMarker,
+  setNewData,
   ...props
 }: GeocoderControlProps) {
   const [markerComponent, setMarker] = useState<React.ReactNode>(null);
@@ -55,7 +58,12 @@ export default function GeocoderControl({
           result &&
           (result.center ||
             (result.geometry?.type === 'Point' && result.geometry.coordinates));
+        console.log(result)
         if (location && marker) {
+            setNewData({
+                lat: location[1],
+                lng: location[0]
+            })
           setMarker(
             <Marker
               {...(marker as Omit<MarkerProps, 'longitude' | 'latitude>'>)}
