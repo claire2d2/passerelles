@@ -34,6 +34,7 @@ export default function GeocoderControl({
     else {
         setIsMarker(false)
     }
+    console.log(markerComponent)
   },[markerComponent])
 
   const geocoder = useControl<MapboxGeocoder>(
@@ -66,6 +67,11 @@ export default function GeocoderControl({
           setMarker(null);
         }
       });
+      // Handle geocoder clear event (reset the marker when cleared)
+      ctrl.on('clear', () => {
+        setMarker(null);  // Reset marker when input is cleared
+      });
+
       ctrl.on('error', onError);
 
       return ctrl;
