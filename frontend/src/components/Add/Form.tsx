@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CREATE_PASSERELLE } from "../../requests/passerelles.requests";
-import { CreatePasserelleInput, CreatePasserelleMutation, CreatePasserelleMutationVariables } from "../../generated/graphql";
+import { CreatePasserelleMutation, CreatePasserelleMutationVariables } from "../../generated/graphql";
 import { useMutation } from "@apollo/client";
 
 // TODO: harmonize text input for city and country (capitalize etc)
@@ -25,7 +25,7 @@ const Form = ({ data }: any) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setFormData((prevData: any) => ({
       ...prevData,
       [name]: value
     }));
