@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client"
 import { PasserellesQuery, PasserellesQueryVariables} from "../../generated/graphql"
 
 import PasserelleCard from "./PasserelleCard"
-import examplePasserelles from "./example.json"
+import defaultImage from "./bridge-icon.png"
 
 // interface PasserelleTilesProps {
 //     id: string,
@@ -20,7 +20,7 @@ const PasserelleTiles = () => {
     <div className={`max-h-full grid grid-cols-${4} grid-rows-2 gap-1 p-2`}>
     {passerellesData?.passerelles?.length === 0 && "Pas de passerelles à montrer"}    
     {passerellesData?.passerelles && passerellesData?.passerelles?.map((passerelle)=> {
-        return <PasserelleCard key={passerelle.id} image={passerelle.image} title={passerelle.title} country={passerelle.country} city={passerelle.city}/>
+        return <PasserelleCard key={passerelle.id} image={passerelle.image ? passerelle.image : defaultImage} title={passerelle.title} country={passerelle.country} city={passerelle.city}/>
     })}
 </div>
   )

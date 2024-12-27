@@ -29,7 +29,6 @@ export const FIND_PASSERELLE_BY_ID = gql`
 `;
 
 export const CREATE_PASSERELLE = gql`
-
     mutation CreatePasserelle($data: CreatePasserelleInput!) {
     createPasserelle(data: $data) {
       id
