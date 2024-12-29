@@ -1,33 +1,41 @@
-import UploadWidget from "./UploadWidget"
-import { useState } from "react";
+import UploadWidget from "./UploadWidget";
+import { useEffect, useState } from "react";
 
-const UploadButton = () => {
-    const [url, updateUrl] = useState();
-    const [error, updateError] = useState();
-
-    function handleOnUpload(error: any, result: any, widget: any) {
-
-        
-        if ( error ) {
-          updateError(error);
-          widget.close({
-            quiet: true
-          });
-          return;
-        }
-        updateUrl(result?.info?.secure_url);
-      }
-  return (
-    <UploadWidget onUpload={handleOnUpload}>
-          {({ open }) => {
-            return (
-              <button onClick={() => open()}>
-                Upload an Image
-              </button>
-            )
-          }}
-        </UploadWidget>
-  )
+interface UploadButtonProps {
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default UploadButton
+const UploadButton: React.FC<UploadButtonProps> = ({ setImageUrl }) => {
+  const [error, updateError] = useState<string | null>(null);
+  const [url, setUrl] = useState<string>("");
+
+  useEffect(() => {
+    setImageUrl(url);
+  }, [url, setImageUrl]);
+
+  function handleOnUpload(error: any, result: any, widget: any) {
+    if (error) {
+      updateError(error.message || "An error occurred during upload.");
+      widget.close({
+        quiet: true,
+      });
+      return;
+    }
+    setUrl(result?.info?.secure_url || "");
+  }
+
+  return (
+    <UploadWidget onUpload={handleOnUpload}>
+      {({ open }) => (
+        <div>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <button onClick={() => open()} type="button">
+            Upload an Image
+          </button>
+        </div>
+      )}
+    </UploadWidget>
+  );
+};
+
+export default UploadButton;
