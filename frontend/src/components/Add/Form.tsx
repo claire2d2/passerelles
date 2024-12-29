@@ -6,6 +6,7 @@ import {
 } from "../../generated/graphql";
 import { useMutation } from "@apollo/client";
 import "./Add.css";
+import UploadButton from "../UploadFile/UploadButton";
 // TODO: harmonize text input for city and country (capitalize etc)
 
 const Form = ({ data }: any, setIsMarker: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -19,6 +20,7 @@ const Form = ({ data }: any, setIsMarker: React.Dispatch<React.SetStateAction<bo
 		image:
 			"https://media.istockphoto.com/id/177770941/fr/photo/golden-gate-bridge-san-francisco.jpg?s=612x612&w=0&k=20&c=4T7VHWBqTC7MRkaR7Ae8ZzzEW7n7Dp_KMDmUtxW8k-E=",
 	});
+	const [file, setFile] = useState<File|null>(null)
     const [canSubmit, setCanSubmit] = useState<boolean>(false)
 
     // If mandatory fields (title, lat, lng TODO add image) are missing, disable button
@@ -137,7 +139,11 @@ const Form = ({ data }: any, setIsMarker: React.Dispatch<React.SetStateAction<bo
 							<span className={labelStyle}>Lng :</span> {data.lng}
 						</p>
 					</li>
-					<li>ADD IMAGE HERE</li>
+					<li><label htmlFor="file" className="font-semibold">
+        Photo : 
+      </label>
+	  <UploadButton/>
+     </li>
 				</ul>
 				<button disabled={!canSubmit} type="submit" className="bg-main w-1/2 m-auto text-white font-bold p-2 border rounded-md disabled:bg-disabled">Ajouter</button>
                 <button className="absolute top-1 right-2 hover:font-semibold" onClick={()=> handleCloseForm()}>x</button>
