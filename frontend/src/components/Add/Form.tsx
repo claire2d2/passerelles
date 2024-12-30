@@ -37,7 +37,7 @@ const Form = ({ data }: any, setIsMarker: React.Dispatch<React.SetStateAction<bo
 		setFormData((prevData: any) => ({...prevData, image: imageUrl}))
 	}, [imageUrl])
 
-	const [createPasserelle, { error }] = useMutation<
+	const [createPasserelle] = useMutation<
 		CreatePasserelleMutation,
 		CreatePasserelleMutationVariables
 	>(CREATE_PASSERELLE);

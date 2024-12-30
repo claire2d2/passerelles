@@ -9,7 +9,6 @@ import Form from "../components/Add/Form";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./../components/Add/Add.css";
 import { useState } from "react";
-import { CreatePasserelleInput}from "../generated/graphql";
 
 const Add = () => {
 	const mapBoxAPI = import.meta.env.VITE_MAPBOX_API_TOKEN;
