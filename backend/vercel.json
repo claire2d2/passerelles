@@ -2,8 +2,8 @@
     "version": 2,
     "routes": [
       {
-       "src": "dist/api/graphql.js",
-      "use": "@vercel/node"
+        "src": "/api/graphql",
+        "dest": "/api/graphql.js"
       }
     ]
   }
