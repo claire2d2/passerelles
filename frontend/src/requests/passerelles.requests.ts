@@ -24,12 +24,13 @@ export const FIND_PASSERELLE_BY_ID = gql`
 			description
 			lat
 			lng
+			country
+			city
 		}
 	}
 `;
 
 export const CREATE_PASSERELLE = gql`
-
     mutation CreatePasserelle($data: CreatePasserelleInput!) {
     createPasserelle(data: $data) {
       id
@@ -39,6 +40,7 @@ export const CREATE_PASSERELLE = gql`
       lat
       country
       city
+	  image
   }
   }
 `;

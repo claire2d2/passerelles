@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.12.4",
+    "@cloudinary-util/types": "^1.6.0",
     "@heroicons/react": "^2.2.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.3",
     "@mapbox/search-js-react": "^1.0.0-beta.24",
@@ -19,6 +20,7 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.47.10",
     "@types/mapbox__mapbox-gl-geocoder": "^5.0.0",
+    "cloudinary": "^2.5.1",
     "dotenv": "^16.4.7",
     "graphql": "^16.10.0",
     "graphql-codegen": "^0.4.0",

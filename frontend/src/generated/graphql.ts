@@ -196,14 +196,14 @@ export type FindPasserelleQueryVariables = Exact<{
 }>;
 
 
-export type FindPasserelleQuery = { __typename?: 'Query', findPasserelle?: { __typename?: 'Passerelle', title?: string | null, image?: string | null, description?: string | null, lat: string, lng: string } | null };
+export type FindPasserelleQuery = { __typename?: 'Query', findPasserelle?: { __typename?: 'Passerelle', title?: string | null, image?: string | null, description?: string | null, lat: string, lng: string, country?: string | null, city?: string | null } | null };
 
 export type CreatePasserelleMutationVariables = Exact<{
   data: CreatePasserelleInput;
 }>;
 
 
-export type CreatePasserelleMutation = { __typename?: 'Mutation', createPasserelle?: { __typename?: 'Passerelle', id?: string | null, title?: string | null, description?: string | null, lng: string, lat: string, country?: string | null, city?: string | null } | null };
+export type CreatePasserelleMutation = { __typename?: 'Mutation', createPasserelle?: { __typename?: 'Passerelle', id?: string | null, title?: string | null, description?: string | null, lng: string, lat: string, country?: string | null, city?: string | null, image?: string | null } | null };
 
 
 export const PasserellesDocument = gql`
@@ -262,6 +262,8 @@ export const FindPasserelleDocument = gql`
     description
     lat
     lng
+    country
+    city
   }
 }
     `;
@@ -308,6 +310,7 @@ export const CreatePasserelleDocument = gql`
     lat
     country
     city
+    image
   }
 }
     `;

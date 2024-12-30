@@ -31,6 +31,12 @@ export default class PasserelleEntity {
     @Column()
     lng: string;
 
+	@Column({ nullable: true })
+    city: string;
+
+    @Column({ nullable: true })
+    country: string;
+
 	@OneToOne(() => ProfileEntity)
 	@JoinColumn({
 		name: "contributor_id", // Foreign key column in `passerelles` table

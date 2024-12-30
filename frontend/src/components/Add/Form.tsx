@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CREATE_PASSERELLE } from "../../requests/passerelles.requests";
-import { CreatePasserelleMutation, CreatePasserelleMutationVariables } from "../../generated/graphql";
+import {
+	CreatePasserelleMutation,
+	CreatePasserelleMutationVariables,
+} from "../../generated/graphql";
 import { useMutation } from "@apollo/client";
-
+import "./Add.css";
+import UploadButton from "../UploadFile/UploadButton";
 // TODO: harmonize text input for city and country (capitalize etc)
 
-const Form = ({ data }: any) => {
+const Form = ({ data }: any, setIsMarker: React.Dispatch<React.SetStateAction<boolean>>) => {
 	const [formData, setFormData] = useState<any>({
 		title: "",
 		description: "",
@@ -13,97 +17,142 @@ const Form = ({ data }: any) => {
 		city: "",
 		lat: data.lat.toString(),
 		lng: data.lng.toString(),
-        image: "https://media.istockphoto.com/id/177770941/fr/photo/golden-gate-bridge-san-francisco.jpg?s=612x612&w=0&k=20&c=4T7VHWBqTC7MRkaR7Ae8ZzzEW7n7Dp_KMDmUtxW8k-E="
+		image:
+			"",
 	});
+	const [imageUrl, setImageUrl] = useState<string>("")
+    const [canSubmit, setCanSubmit] = useState<boolean>(false)
 
-    const [createPasserelle, { error }] = useMutation<
-    CreatePasserelleMutation,
-    CreatePasserelleMutationVariables
-  >(CREATE_PASSERELLE);
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setFormData((prevData: any) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        
-        try {
-            createPasserelle({
-                variables: { data: formData },
-                // variables: { data: { ...values, price: +values.price } },
-                onCompleted: () => {
-                  console.log("Passerelle créée");
-                },
-              });
-        } catch (error) {
-            console.log(error)
+    // If mandatory fields (title, lat, lng TODO add image) are missing, disable button
+    useEffect(() => {
+        if(formData.title === "" || formData.lat === "" || formData.lng === "") {
+            setCanSubmit(false)
         }
+        else {
+            setCanSubmit(true)
+        }
+    },[formData])
+
+	useEffect(() => {
+		setFormData((prevData: any) => ({...prevData, image: imageUrl}))
+	}, [imageUrl])
+
+	const [createPasserelle, { error }] = useMutation<
+		CreatePasserelleMutation,
+		CreatePasserelleMutationVariables
+	>(CREATE_PASSERELLE);
+
+	const handleChange = (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		const { name, value } = event.target;
+		setFormData((prevData: any) => ({
+			...prevData,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		try {
+			createPasserelle({
+				variables: { data: formData },
+				// variables: { data: { ...values, price: +values.price } },
+				onCompleted: () => {
+					console.log("Passerelle créée");
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+    const handleCloseForm = () => {
+        setIsMarker(false)
     }
 
+	const fieldStyle = "flex gap-2";
 	const inputStyle = "border border-disabled border-solid rounded-md";
+	const labelStyle = "font-semibold";
 
 	return (
 		<div>
-			<form className="text-left" onSubmit={handleSubmit}>
-				<div>Rajouter une passerelle:</div>
-				<ul>
-					<li>
-						<label htmlFor="title">Titre :</label>
+			<form
+				className="text-left flex flex-col gap-3 p-3"
+				onSubmit={handleSubmit}
+			>
+				<div className="text-center text-xl pb-2 font-semibold">
+					Rajouter une passerelle:
+				</div>
+				<ul className="flex flex-col gap-2">
+					<li className={fieldStyle}>
+						<label htmlFor="title" className={labelStyle}>
+							Titre :
+						</label>
 						<input
 							name="title"
 							type="text"
 							value={data.title}
 							className={inputStyle}
-                            onChange={handleChange}
+							onChange={handleChange}
 							required
 						/>
 					</li>
-					<li>
-						<label htmlFor="description">Description :</label>
+					<li className={fieldStyle}>
+						<label htmlFor="description" className={labelStyle}>
+							Description :
+						</label>
 						<input
 							name="description"
 							type="text"
 							value={data.description}
 							className={inputStyle}
-                            onChange={handleChange}
+							onChange={handleChange}
 						/>
 					</li>
-					<li>
-						<div>Coordonnées :</div>
-						<div>
-							<label htmlFor="country">Pays :</label>
+					<li className="flex flex-col gap-2">
+						<div className={fieldStyle}>
+							<label htmlFor="country" className={labelStyle}>
+								Pays :
+							</label>
 							<input
 								name="country"
 								type="text"
 								value={data.country}
 								className={inputStyle}
-                                onChange={handleChange}
+								onChange={handleChange}
 							/>
 						</div>
-						<div>
-							<label htmlFor="city">City :</label>
+						<div className={fieldStyle}>
+							<label htmlFor="city" className={labelStyle}>
+								City :
+							</label>
 							<input
 								name="city"
 								type="text"
 								value={data.city}
 								className={inputStyle}
-                                onChange={handleChange}
+								onChange={handleChange}
 							/>
 						</div>
-						<p>Lat : {data.lat}</p>
-						<p>Lng : {data.lng}</p>
+						<p className={fieldStyle}>
+							<span className={labelStyle}>Lat : </span>
+							{data.lat}
+						</p>
+						<p className={fieldStyle}>
+							<span className={labelStyle}>Lng :</span> {data.lng}
+						</p>
 					</li>
-					<li>ADD IMAGE HERE</li>
+					<li><label htmlFor="file" className="font-semibold">
+        Photo : 
+      </label>
+	  <UploadButton setImageUrl={setImageUrl}/>
+     </li>
 				</ul>
-				<button type="submit">Rajouter la passerelle</button>
-			</form>
+				<button disabled={!canSubmit} type="submit" className="bg-main w-1/2 m-auto text-white font-bold p-2 border rounded-md disabled:bg-disabled">Ajouter</button>
+                <button className="absolute top-1 right-2 hover:font-semibold" onClick={()=> handleCloseForm()}>x</button>
+            </form>
 		</div>
 	);
 };
