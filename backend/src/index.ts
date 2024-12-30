@@ -1,49 +1,18 @@
 import "reflect-metadata";
 import "module-alias/register";
 
-import depthLimit from 'graphql-depth-limit'
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import typeDefs from "./typeDefs";
-import resolvers from "./resolvers";
-import {datasource} from "./lib/datasource";
+import depthLimit from 'graphql-depth-limit';
+import { ApolloServer } from '@apollo/server';
+const { startServerAndCreateNextHandler } = require('@as-integrations/next');
+import typeDefs from './typeDefs';
+import resolvers from './resolvers';
+import { datasource } from './lib/datasource';
 
-
-
-export const server = new ApolloServer<{}>({
+// Create Apollo Server instance
+export const server = new ApolloServer({
   typeDefs,
   resolvers,
-  validationRules: [depthLimit(5)] //n+1
+  validationRules: [depthLimit(5)], // Prevent deep queries (n+1 issue)
 });
-async function main() {
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
-    
-  });
-  await datasource.initialize(); //initialisation de la base de données
-  console.log(`🚀  Server ready at: ${url}`);
-}
-main();
 
-// import express from "express";
-// import adsRouter from "./routes/ads.routes";
-// import categoriesRouter from "./routes/categories.routes";
-// import tagsRouter from "./routes/tags.routes";
-// import datasource from "./lib/datasource";
-// import cors from "cors";
-// import path from "path";
-
-// const app = express();
-
-// app.use(cors({ origin: ["http://localhost:5173"] })); // on autorise le front à communiquer avec notre back
-// app.use(express.json());
-// app.use("/uploads", express.static(path.join(__dirname, "..", "uploads"))); // on expose à l'extérieur notre dossier uploads (http://localhost:4000/uploads)
-
-// app.use("/ads", adsRouter);
-// app.use("/categories", categoriesRouter);
-// app.use("/tags", tagsRouter);
-
-// app.listen(4000, async () => {
-//   await datasource.initialize(); //initialisation de la base de données
-//   console.log("Le serveur est lancé sur le port 4000");
-// });
+export const handler = startServerAndCreateNextHandler(server, { path: "/api/graphql" });

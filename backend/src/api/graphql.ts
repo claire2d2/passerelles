@@ -1,5 +1,4 @@
-import {server} from "../index"
-const { startServerAndCreateNextHandler } = require('@as-integrations/next');
+// api/graphql.js
+const { handler } = require('../index'); // Import the handler from the correct file
 
-// Export the handler to process requests
-module.exports = startServerAndCreateNextHandler(server);
+module.exports = handler; // Export the handler for Vercel
