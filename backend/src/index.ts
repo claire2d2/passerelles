@@ -10,7 +10,7 @@ import {datasource} from "./lib/datasource";
 
 
 
-const server = new ApolloServer<{}>({
+export const server = new ApolloServer<{}>({
   typeDefs,
   resolvers,
   validationRules: [depthLimit(5)] //n+1
