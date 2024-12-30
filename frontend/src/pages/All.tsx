@@ -1,11 +1,10 @@
 import PasserelleTiles from "../components/All/PasserelleTiles";
-import examplePasserelles from "../components/All/example.json"
 const All = () => {
 	// rajouter pagination
 
 	return (
 		<div className="flex flex-row h-full">
-			<div className="w-1/5 bg-button h-full flex flex-col">
+			{/* <div className="w-1/5 bg-button h-full flex flex-col">
 				<div className="h-1/3">
                     <h2>Trier par : </h2>
                     <h2>Filtres :</h2>
@@ -18,9 +17,9 @@ const All = () => {
                 <div className="h-2/3">
                 Ouvrir dans Google Maps
                 </div>
-			</div>
-			<div className="w-4/5 flex flex-col flex-1">
-				<div className="flex justify-between h-10">
+			</div> */}
+			<div className="w-full flex flex-col flex-1">
+				{/* <div className="flex justify-between h-10">
 					<div className="flex flex-row text-sm gap-2">
 						<div>Trier par:</div>
 						<select name="" id="">
@@ -40,12 +39,12 @@ const All = () => {
 							<option value="">25</option>
 						</select>
 					</div>
-				</div>
-                <div className="max-h-[90%]">
+				</div> */}
+                <div className="max-h-[100%]">
                     <PasserelleTiles />
                 </div>
                
-                <div className="h-10">Pagination</div>
+                {/* <div className="h-10">Pagination</div> */}
 			</div>
 		</div>
 	);

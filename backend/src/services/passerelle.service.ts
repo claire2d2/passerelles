@@ -41,15 +41,17 @@ export default class PasserelleService {
 		image,
 		...passerelle
 	}: MutationCreatePasserelleArgs["data"]) {
-		const { title, description, lat, lng } = passerelle;
+		const { title, description, lat, lng, city, country } = passerelle;
 		// create a geo point for the passerelle based on the user's input
 		const newPass = this.db.create({
 			...passerelle,
 			title,
 			description,
-			image,
 			lat,
 			lng,
+			city, 
+			country,
+			image
 		});
 		const errors = await validate(newPass);
 		if (errors.length > 0) {

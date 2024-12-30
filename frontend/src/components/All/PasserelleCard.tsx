@@ -1,20 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
+import { Passerelle } from "../../generated/graphql";
 
-interface data {
-	title: string;
-	// description: string;
-	image: string;
-	// geo: {
-	//     lat: string;
-	//     lng: string;
-	// },
-	country: string | undefined;
-	city: string | undefined;
-	// validated: boolean
-}
-
-const PasserelleCard: React.FC<data> = ({ title, image, country, city }) => {
+const PasserelleCard: React.FC<Omit<Passerelle, "lat" |"lng">> = ({ title, image, country, city }) => {
 	useEffect(() => {
 		console.log(title);
 	}, []);
@@ -25,7 +13,7 @@ const PasserelleCard: React.FC<data> = ({ title, image, country, city }) => {
 		>
 			<h3>{title}</h3>
 			<div className="h-2/3 w-full">
-				<img className="h-full w-full object-cover" src={image} alt="photo de passerelle" />
+				{image && <img className="h-full w-full object-cover" src={image} alt="photo de passerelle" />}
 			</div>
 			<div className="text-sm">
                 <p><span className="font-medium">Pays: </span><span className="italic">{country ? country : "Inconnu"}</span></p>
