@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useControl, Marker, MarkerProps, ControlPosition } from 'react-map-gl';
 import MapboxGeocoder, { GeocoderOptions } from '@mapbox/mapbox-gl-geocoder';
-import { CreatePasserelleInput } from '../../generated/graphql';
 
 type GeocoderControlProps = Omit<GeocoderOptions, 'accessToken' | 'mapboxgl' | 'marker'> & {
   mapboxAccessToken: string;

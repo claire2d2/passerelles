@@ -21,6 +21,6 @@ const mapBoxAPI = import.meta.env.VITE_MAPBOX_API_TOKEN
             />
       </div>
   )
-}
+} 
 
 export default GlobalMap
