@@ -1,4 +1,4 @@
-import {server} from "../src/index"
+import {server} from "../index"
 const { startServerAndCreateNextHandler } = require('@as-integrations/next');
 
 // Export the handler to process requests

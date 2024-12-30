@@ -12,6 +12,8 @@ node_modules/
 /frontend/.env
 /backend/.env
 
+/backend/dist/
+
 # IDE configurations
 .vscode/
 .idea/
