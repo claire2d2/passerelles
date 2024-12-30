@@ -10,6 +10,8 @@
     "strictPropertyInitialization": false, /* Check for class properties that are declared but not set in the constructor. */
     /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
       "@/*": [
