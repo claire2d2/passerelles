@@ -1,5 +1,6 @@
 // import { useState } from "react"
 // import { HiArrowRightStartOnRectangle } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 const AuthHeader = () => {
 	const AuthStyle = "flex flex-row gap-2 w-full justify-center font-medium";
@@ -8,8 +9,8 @@ const AuthHeader = () => {
 	return (
 		<>
 			<div className={AuthStyle}>
-				<div className={buttonStyle}>Se connecter</div>
-				<div className={buttonStyle}>S'enregistrer</div>
+				<div className={buttonStyle}><Link to="/login">Se connecter</Link></div>
+				<div className={buttonStyle}><Link to="/signup">S'enregistrer</Link></div>
 			</div>
 
 			{/* {isLoggedIn && <div className={AuthStyle}>

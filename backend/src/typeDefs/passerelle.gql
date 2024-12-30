@@ -1,0 +1,58 @@
+type Passerelle {
+    id: ID
+    title: String
+    description: String
+    image: String
+    lat: String!
+    lng: String!
+    country: String
+    city: String
+    favorites : [Profile]
+    contributor: Profile
+    validated: Boolean
+    created_at: Date
+    updated_at: Date
+}
+
+type Query {
+    passerelles(filter: FilterType): [Passerelle]
+    findPasserelle(id: ID!): Passerelle
+}
+
+type Mutation {
+  createPasserelle(data: CreatePasserelleInput!): Passerelle
+  updatePasserelle(data: UpdatePasserelleInput!): Passerelle
+}
+
+input FilterType {
+  limit: Int
+  sortBy: String
+  order: FindOptionOrderValue 
+}
+
+input CreatePasserelleInput {
+    title: String!
+    description: String
+    image: String!
+    lat: String
+    lng: String
+    country: String
+    city: String
+    contributorId: String
+    validated: Boolean
+
+}
+
+input UpdatePasserelleInput {
+    title: String!
+    description: String
+    image: String!
+    favoritesIds : [String]
+    contributorId: String
+    validated: Boolean
+}
+
+enum FindOptionOrderValue {
+  ASC
+  DESC
+}

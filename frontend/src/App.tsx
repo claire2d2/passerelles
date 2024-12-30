@@ -9,7 +9,9 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './layout/Layout'
 
 import Homepage from './pages/Homepage'
-
+import All from './pages/All'
+import Add from './pages/Add'
+import About from './pages/About'
 
 const supabaseURL : string = import.meta.env.VITE_SUPABASE_URL || "http://localhost/3000"
 const supabaseAnonKey : string = import.meta.env.VITE_SUPABASE_ANON_KEY || ""
@@ -44,6 +46,9 @@ export default function App() {
       <Route path="/" element={<Layout/>}>
           <Route path="signup" element={<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />}/>
           <Route index element={<Homepage/>}/>
+          <Route path="/all" element={<All/>}/>
+          <Route path="/add" element={<Add/>}/>
+          <Route path="/about" element={<About/>}/>
       </Route>
 
     </Routes>

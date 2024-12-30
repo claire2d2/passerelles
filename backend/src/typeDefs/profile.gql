@@ -1,0 +1,13 @@
+type Profile {
+    id: ID
+    user_id: String!
+    is_admin: Boolean
+    favorites : [Passerelle]
+    contributions: [Passerelle]
+    created_at: Date
+    updated_at: Date
+}
+
+type Query {
+    findProfileId(id: ID!): Profile
+}
